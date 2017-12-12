@@ -28,5 +28,8 @@ export class HttpcontrollerService {
     return this.httpClient.put(this.url + 'eidt', JSON.stringify(t), {headers: this.headers})
       .toPromise().then(res => res.valueOf() as T);
   }
-  
+
+  public deleteType<T>(t: T): Promise<T> {
+    return null;
+  }
 }
