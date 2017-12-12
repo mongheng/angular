@@ -11,10 +11,12 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'app';
   public users: User[];
+  public cuser: User;
   
   constructor(private httpservice: HttpcontrollerService) {}
   
   ngOnInit(): void {
     this.httpservice.getTypes<User>().then(user => this.users = user);
+    this.httpservice.getTypeById<User>('76519be9-1975-4ac5-b1d2-1892c7d2e533').then(u => this.cuser = u);
   }
 }
