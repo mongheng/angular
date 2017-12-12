@@ -32,4 +32,5 @@ export class HttpcontrollerService {
   public deleteType<T>(t: T): Promise<T> {
     return null;
   }
+  
 }
