@@ -33,4 +33,7 @@ export class HttpcontrollerService {
     return null;
   }
   
+  public selectTypes<T, S>(t: T, s: S): Promise<T> {
+    return null;
+  }
 }
