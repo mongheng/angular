@@ -17,7 +17,7 @@ export class HttpcontrollerService {
   }
   
   public getTypeById<T>(id: string): Promise<T> {
-    return this.httpClient.get(this.url + 'item?userid=' + id).toPromise()
+    return this.httpClient.get(this.url + 'item/' + id).toPromise()
       .then(res => res.valueOf() as T).catch(this.handleError);
   }
   
@@ -31,8 +31,9 @@ export class HttpcontrollerService {
       .toPromise().then(res => res.valueOf() as T).catch(this.handleError);
   }
 
-  public deleteType<T>(t: T): Promise<T> {
-    return null;
+  public deleteType(id: string): Promise<void> {
+    return this.httpClient.delete(this.url + 'delete/' + id, {headers: this.headers})
+      .toPromise().then(() => null).catch(this.handleError);
   }
   
   public selectTypes<T, S>(t: T, s: S): Promise<T> {

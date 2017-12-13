@@ -10,10 +10,17 @@
 	<mat-list>
 		<mat-list-item *ngFor="let user of users">
 			{{user.userid}}, {{user.username}}, {{user.role.roleName}}
-		</mat-list-item>	
+		</mat-list-item>
 	</mat-list>
 </div>
 
+<div>
+	<h4>{{cuser.userid}}, {{cuser.username}}, {{cuser.role.roleName}}</h4>
+</div>
+<div>
+  <a routerLink = "components/simple-route">Simple route</a>
+</div>
+<router-outlet></router-outlet>
 <script type="text/javascript">
   if ('serviceWorker' in navigator) {
 	  navigator.serviceWorker.register('sw.js', {scope: '.'})
