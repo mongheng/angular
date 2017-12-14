@@ -9,25 +9,31 @@
 <div>
 	<mat-list>
 		<mat-list-item *ngFor="let user of users">
-			{{user.userid}}, {{user.username}}, {{user.role.roleName}}
+			{{user?.userid}}, {{user?.username}}, {{user?.role.roleName}}
 		</mat-list-item>
 	</mat-list>
 </div>
 
 <div>
-	<h4>{{cuser.userid}}, {{cuser.username}}, {{cuser.role.roleName}}</h4>
+  <h4>Accessing @PathVariable.</h4>
+	<h4>{{puser?.userid}}, {{puser?.username}}, {{puser?.role.roleName}}</h4>
 </div>
+<div>
+  <h3>Accessing @RequestParam.</h3>
+  <h3>{{ruser?.userid}}, {{ruser?.username}}, {{ruser?.role.roleName}}</h3>
+</div>
+
 <div>
   <a routerLink = "components/simple-route">Simple route</a>
 </div>
 <router-outlet></router-outlet>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   if ('serviceWorker' in navigator) {
-	  navigator.serviceWorker.register('sw.js', {scope: '.'})
+	  navigator.serviceWorker.register('/sw.js')
 	  .then(function(reg) {
 	    console.log('Registration succeeded. Scope is ' + reg.scope)
 	  }),function(error) {
 	    console.log('Registration failed with ' + error);
 	  };
 	}
-</script>
+</script> -->

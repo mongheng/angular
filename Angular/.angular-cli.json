@@ -9,8 +9,10 @@
       "outDir": "dist",
       "assets": [
         "assets",
+        "sw-register.js",
         "sw.js",
-        "favicon.ico"
+        "favicon.ico",
+        "offline.html"
       ],
       "index": "index.html",
       "main": "main.ts",

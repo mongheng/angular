@@ -21,6 +21,11 @@ export class HttpcontrollerService {
       .then(res => res.valueOf() as T).catch(this.handleError);
   }
 
+  public getTypeByIdRequestParam<T>(id: string): Promise<T> {
+    return this.httpClient.get(this.url + 'item?id=' + id).toPromise()
+    .then(res => res.valueOf() as T).catch(this.handleError);
+  }
+
   public createType<T>(t: T): Promise<T> {
     return this.httpClient.post(this.url + 'save', JSON.stringify(t), {headers: this.headers})
       .toPromise().then(res => res.valueOf() as T).catch(this.handleError);
