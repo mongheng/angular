@@ -3,5 +3,7 @@ if ('serviceWorker' in navigator) {
     scope: '/'
   }).then(registration => {
     console.log('Service Worker registration completed.');
+  }).catch(err => {
+    console.log('Service Worker registration failed:', err);
   });
 }
