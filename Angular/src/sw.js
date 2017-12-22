@@ -1,51 +1,61 @@
-/*self.addEventListener("install", function(event) {
-  event.waitUntil(
-    caches.open("mongheng").then(function(cache) {
-      cache.addAll([
-        "/index.html",
-        "/app.component.css"
-      ])
+let log = console.log.bind(console);
+let err = console.error.bind(console);
+
+let version = '1';
+let cacheName = 'pwa-client-v' + version;
+let dataCacheName = 'pwa-client-data-v' + version;
+let appShellFilesToCache = [
+  './',
+  './index.html',
+  './inline.bundle.js',
+  './styles.bundle.js',
+  './vendor.bundle.js',
+  './main.bundle.js'
+];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(self.skipWaiting());
+  log('Service Worker: Installed');
+
+  e.waitUntil(
+    caches.open(cacheName).then((cache) => {
+      log('Service Worker: Caching App Shell');
+      return cache.addAll(appShellFilesToCache);
     })
-  )
+  );
 });
 
-self.addEventListener("fetch", function(event){
-  event.respondWith(
-    caches.open("mongheng").then(function(cache){
-      return cache.match(event.request);
+self.addEventListener('activate', (e) => {
+  e.waitUntil(self.clients.claim());
+  log('Service Worker: Active');
+
+  e.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+
+        if (key !== cacheName) {
+          log('Service Worker: Removing old cache', key);
+          return caches.delete(key);
+        }
+
+      }));
     })
-  )
+  );
 });
-*/const VERSION = 'v2';
 
-function log(messages) {
-  console.log(VERSION, messages);
-}
+self.addEventListener('fetch', (e) => {
+  log('Service Worker: Fetch URL ', e.request.url);
 
-log('Installing Service Worker');
-
-async function installServiceWorker() {
-  log("Service Worker installation started.");
-  const request = new Request('offline.html');
-  const response = await fetch(request);
-
-  log("response received after loading offline.html", response);
-  if (response.status !== 200) {
-    throw new Error('Could not load offline page!');
-  }
-
-  const cache = await caches.open('app-cache');
-  cache.put(request, response);
-
-  log("Cache offline.html");
-}
-
-self.addEventListener('install', event => event.waitUntil(installServiceWorker()));
-
-/* self.addEventListener("install", () => {
-  log('version is installed');
-}); */
-
-self.addEventListener("activate", () => {
-  log('version is activated');
+  // Match requests for data and handle them separately
+  e.respondWith(
+    caches.match(e.request.clone()).then((response) => {
+      return response || fetch(e.request.clone()).then((r2) => {
+          return caches.open(dataCacheName).then((cache) => {
+            console.log('Service Worker: Fetched & Cached URL ', e.request.url);
+            cache.put(e.request.url, r2.clone());
+            return r2.clone();
+          });
+        });
+    })
+  );
 });

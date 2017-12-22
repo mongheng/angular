@@ -16,9 +16,18 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script src="/sw-register.js"></script>
+
 </head>
 <body>
   <app-root></app-root>
+  <script defer>
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.register('/sw.js').then(() => {
+        console.log('Service worker installed')
+      }, err => {
+        console.error('Service worker error:', err);
+      });
+    }
+  </script>
 </body>
 </html>
