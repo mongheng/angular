@@ -1,6 +1,7 @@
 import { User } from '../model/user';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HttpcontrollerService {
@@ -11,8 +12,8 @@ export class HttpcontrollerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getTypes<T>(): Promise<T[]> {
-    return this.httpClient.get(this.url + 'items').toPromise()
+  public getTypes<T>(className: string): Promise<T[]> {
+    return this.httpClient.get(this.url + className).toPromise()
       .then(res => res.valueOf() as T[]).catch(this.handleError);
   }
 
@@ -41,8 +42,8 @@ export class HttpcontrollerService {
       .toPromise().then(() => null).catch(this.handleError);
   }
 
-  public selectTypes<T, S>(t: T, s: S): Promise<T> {
-    return null;
+  public selectUsers(className: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.url + className);
   }
 
   private handleError(error: any): Promise<any> {

@@ -8,10 +8,10 @@
 <h2><mat-toolbar color="primary"> Here are some links to help you start: </mat-toolbar></h2>
 <div>
 	<mat-list>
-		<mat-list-item *ngFor="let user of users">
-			{{user?.userid}}, {{user?.username}}, {{user?.role.roleName}}
+		<mat-list-item *ngFor="let userr of users">
+			{{userr?.userid}}, {{userr?.username}}, {{userr?.role.roleName}}
 		</mat-list-item>
-	</mat-list>
+  </mat-list>
 </div>
 
 <div>
@@ -22,18 +22,117 @@
   <h3>Accessing @RequestParam...</h3>
   <h3>{{ruser?.userid}}, {{ruser?.username}}, {{ruser?.role.roleName}}</h3>
 </div>
-
 <div>
   <a routerLink = "components/simple-route">Simple route</a>
 </div>
+<br/>
+<mat-toolbar color='primary' class="container-flex-row">
+  <span>MyCompany</span>
+  <span class="example-spacer"></span>
+  <button mat-button [mat-menu-trigger-for]='appMenu'><mat-icon>menu</mat-icon>Menu</button>
+</mat-toolbar>
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item>Settings </button>
+  <button mat-menu-item>Help </button>
+</mat-menu>
+<br/>
+<div class="example-container">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="User Name" [(ngModel)]="createUser.username">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Password" [(ngModel)]="createUser.password" required>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Email" [(ngModel)]="createUser.email">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Telephone" [(ngModel)]="createUser.telephone">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select matInput [(ngModel)]="createUser.role" placeholder="Select Role" required>
+      <mat-option *ngFor="let role of roles" [value]="role">{{role.roleName}}</mat-option>
+    </mat-select>
+    <!-- <mat-error *ngIf="roleControl.hasError('required')">Please choose an role.</mat-error>
+    <mat-hint>{{roleControl.value?.sound}}</mat-hint> -->
+  </mat-form-field>
+</div>
+<div class="container-flex-row">
+  <button (click)="saveUser()" mat-raised-button class='mat-raised mat-primary'>Create</button>
+  <button mat-raised-button class='mat-raised mat-warn'>Cancel</button>
+</div>
+<br/>
+<br/>
+<div class="example-container">
+  <mat-form-field>
+    <mat-select [(ngModel)]="selectedUser" placeholder="Select User" (selectionChange)="disPlayUser()">
+      <mat-option *ngFor="let u of users" [value]="u">{{u.username}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="UserID" [(ngModel)]="selectedUser.userid">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Password" [(ngModel)]="selectedUser.password">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Email" [(ngModel)]="selectedUser.email">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Telephone" [(ngModel)]="selectedUser.telephone">
+  </mat-form-field>
+  <mat-select [(ngModel)]="updateRole" *ngIf="statu; then roleTemplate" placeholder="Select Role" required>
+    <mat-option [value]="updateRole">{{updateRole.roleName}}</mat-option>
+  </mat-select>
+  <ng-template #roleTemplate>
+    <mat-select [(ngModel)]="updateRole" placeholder="Select Role" required>
+      <mat-option *ngFor="let r of roles" [value]="r">{{r.roleName}}</mat-option>
+    </mat-select>
+  </ng-template>
+</div>
+<br/>
+<br/>
+<div class="container-flex-row">
+  <button (click)="updateUser()" mat-raised-button class='mat-raised mat-primary'>Update</button>
+  <button (click)="deleteUser()" mat-raised-button class='mat-raised mat-accent'>Delete</button>
+</div>
+<br/>
+<br/>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="userid">
+      <mat-header-cell *matHeaderCellDef> User ID</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.userid}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef> User Name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.username}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="password">
+      <mat-header-cell *matHeaderCellDef> Password</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.password}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="telephone">
+      <mat-header-cell *matHeaderCellDef> Telephone</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.telephone}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> User Email</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.email}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef> Image</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.image}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef> Role Name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.role.roleName}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
 <router-outlet></router-outlet>
-<!-- <script type="text/javascript">
-  if ('serviceWorker' in navigator) {
-	  navigator.serviceWorker.register('/sw.js')
-	  .then(function(reg) {
-	    console.log('Registration succeeded. Scope is ' + reg.scope)
-	  }),function(error) {
-	    console.log('Registration failed with ' + error);
-	  };
-	}
-</script> -->
+
