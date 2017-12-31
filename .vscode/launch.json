@@ -5,34 +5,25 @@
     "version": "0.2.0",
     "configurations": [
       {
+        "type": "chrome",
+        "request": "launch",
         "name": "Launch Chrome",
-        "type": "chrome",
-        "request": "launch",
-        "url": "http://localhost:4200/#",
-        "webRoot": "${workspaceRoot}"
+        "url": "http://localhost:4200",
+        "trace": true,
+        "runtimeArgs": [
+          "--new-window",
+          "--user-data-dir=D:/Test",
+          "--remote-debugging-port=9222"
+        ],
+        "webRoot": "${workspaceRoot}/src/",
+        "sourceMaps": true
       },
       {
-        "name": "Attach Chrome",
-        "type": "chrome",
-        "request": "attach",
-        "url": "http://localhost:4200/#",
-        "port": 4200,
-        "webRoot": "${workspaceRoot}"
-      },
-      {
-        "name": "Launch Chrome (Test)",
-        "type": "chrome",
-        "request": "launch",
-        "url": "http://localhost:9876/debug.html",
-        "webRoot": "${workspaceRoot}"
-      },
-      {
-        "name": "Launch Chrome (E2E)",
+        "name": "Launch Program",
         "type": "node",
         "request": "launch",
-        "program": "${workspaceRoot}/node_modules/protractor/bin/protractor",
-        "protocol": "inspector",
-        "args": ["${workspaceRoot}/protractor.conf.js"]
+        "program": "${file}",
+        "outFiles": ["${workspaceRoot}/out/**/*.js"]
       }
     ]
 }
