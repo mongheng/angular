@@ -82,14 +82,13 @@
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Telephone" [(ngModel)]="selectedUser.telephone">
   </mat-form-field>
-  <mat-select [(ngModel)]="updateRole" *ngIf="statu; then roleTemplate" placeholder="Select Role" required>
-    <mat-option [value]="updateRole">{{updateRole.roleName}}</mat-option>
+  <mat-select [(ngModel)]="currectRole" placeholder="Current Role" [disabled]="true" required>
+    <mat-option [value]="currectRole">{{currectRole.roleName}}</mat-option>
   </mat-select>
-  <ng-template #roleTemplate>
-    <mat-select [(ngModel)]="updateRole" placeholder="Select Role" required>
-      <mat-option *ngFor="let r of roles" [value]="r">{{r.roleName}}</mat-option>
-    </mat-select>
-  </ng-template>
+  <br/>
+  <mat-select [(ngModel)]="updateRole" placeholder="Select role for update" required>
+    <mat-option *ngFor="let r of roles" [value]="r">{{r.roleName}}</mat-option>
+  </mat-select>
 </div>
 <br/>
 <br/>

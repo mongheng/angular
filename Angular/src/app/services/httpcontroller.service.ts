@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class HttpcontrollerService {
 
-  private url = 'http://localhost:8090/vaadinproject/';
+  private url = 'http://localhost:8080/vaadinproject/';
 
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 

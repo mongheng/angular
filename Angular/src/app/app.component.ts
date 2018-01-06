@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   roles: Role[];
   selectedUser = new User;
   updateRole: Role;
-  statu: boolean;
+  currectRole: Role;
 
   displayedColumns = ['userid', 'username', 'password', 'telephone', 'email', 'image', 'role'];
   dataSource = new UserDataSource(this.httpservice);
@@ -37,11 +37,10 @@ export class AppComponent implements OnInit {
     this.httpservice.getTypeByIdRequestParam<User>('4489d1e1-1b51-4dbe-9c6c-d2df827080ab').then(r => this.ruser = r);
     this.httpservice.getTypes<Role>('roles').then(r => this.roles = r);
 
-    if (this.updateRole == null) {
+    if (this.updateRole == null && this.currectRole == null) {
+      this.currectRole = new Role;
       this.updateRole = new Role;
     }
-    this.statu = true;
-    console.log('statu:' + this.statu);
   }
 
   public saveUser(): void {
@@ -80,8 +79,7 @@ export class AppComponent implements OnInit {
     this.selectedUser.email = this.selectedUser.email;
     this.selectedUser.telephone = this.selectedUser.telephone;
     this.selectedUser.password = this.selectedUser.password;
-    this.updateRole = this.selectedUser.role;
-    this.statu = true;
+    this.currectRole = this.selectedUser.role;
   }
 
   public updateUser(): void {
