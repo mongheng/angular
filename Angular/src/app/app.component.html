@@ -23,7 +23,7 @@
   <h3>{{ruser?.userid}}, {{ruser?.username}}, {{ruser?.role.roleName}}</h3>
 </div>
 <div>
-  <a routerLink = "components/simple-route">Simple route</a>
+  <a routerLink = "simple-route" routerLinkActive="active">Simple route</a>
 </div>
 <br/>
 <mat-toolbar color='primary' class="container-flex-row">
@@ -66,7 +66,7 @@
 <br/>
 <div class="example-container">
   <mat-form-field>
-    <mat-select [(ngModel)]="selectedUser" placeholder="Select User" (selectionChange)="disPlayUser()">
+    <mat-select [(ngModel)]="selectedUser" placeholder="Select User" (selectionChange)="displayUser()">
       <mat-option *ngFor="let u of users" [value]="u">{{u.username}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -132,6 +132,9 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+</div>
+<div class="container-flex-row">
+  <app-date-picker class="example-full-width"></app-date-picker>
 </div>
 <router-outlet></router-outlet>
 

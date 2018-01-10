@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/collections';
 import { FormControl } from '@angular/forms/src/model';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -74,7 +75,7 @@ export class AppComponent implements OnInit {
     this.selectedUser.role = null;
   }
 
-  public disPlayUser(): void {
+  public displayUser(): void {
     this.selectedUser.userid = this.selectedUser.userid;
     this.selectedUser.email = this.selectedUser.email;
     this.selectedUser.telephone = this.selectedUser.telephone;
