@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/collections';
 import { FormControl } from '@angular/forms/src/model';
-import { RouterLinkActive } from '@angular/router';
+import { RouterLinkActive, ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -25,11 +25,13 @@ export class AppComponent implements OnInit {
   selectedUser = new User;
   updateRole: Role;
   currectRole: Role;
+  bStatu: boolean;
 
   displayedColumns = ['userid', 'username', 'password', 'telephone', 'email', 'image', 'role'];
   dataSource = new UserDataSource(this.httpservice);
 
-  constructor(private httpservice: HttpcontrollerService) {}
+  constructor(private httpservice: HttpcontrollerService, private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.httpservice.getTypes<User>('users').then(user => this.users = user);
@@ -42,6 +44,7 @@ export class AppComponent implements OnInit {
       this.currectRole = new Role;
       this.updateRole = new Role;
     }
+    this.bStatu = false;
   }
 
   public saveUser(): void {
@@ -81,6 +84,7 @@ export class AppComponent implements OnInit {
     this.selectedUser.telephone = this.selectedUser.telephone;
     this.selectedUser.password = this.selectedUser.password;
     this.currectRole = this.selectedUser.role;
+    this.bStatu = false;
   }
 
   public updateUser(): void {
@@ -116,6 +120,11 @@ export class AppComponent implements OnInit {
     } catch (error) {
       alert(error.message);
     }
+  }
+
+  public back(): void {
+    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+    this.bStatu = true;
   }
 
 }

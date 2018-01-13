@@ -9,7 +9,8 @@
 <div>
 	<mat-list>
 		<mat-list-item *ngFor="let userr of users">
-			{{userr?.userid}}, {{userr?.username}}, {{userr?.role.roleName}}
+      <a [routerLink]="userr.userid">{{userr?.userid}} </a>
+		   {{userr?.username}}, {{userr?.role.roleName}}
 		</mat-list-item>
   </mat-list>
 </div>
@@ -23,7 +24,9 @@
   <h3>{{ruser?.userid}}, {{ruser?.username}}, {{ruser?.role.roleName}}</h3>
 </div>
 <div>
-  <a routerLink = "simple-route" routerLinkActive="active">Simple route</a>
+  <!-- <a routerLink = "simple-route" routerLinkActive="active">Simple route</a> -->
+  <a [routerLink] = "[{outlets:{popup: ['simple-route']}}]">simple route</a>
+  <button (click)="back()" mat-raised-button class='mat-raised mat-primary' [disabled]="bStatu">back</button>
 </div>
 <br/>
 <mat-toolbar color='primary' class="container-flex-row">
@@ -136,5 +139,5 @@
 <div class="container-flex-row">
   <app-date-picker class="example-full-width"></app-date-picker>
 </div>
-<router-outlet></router-outlet>
+<router-outlet name="popup"></router-outlet>
 

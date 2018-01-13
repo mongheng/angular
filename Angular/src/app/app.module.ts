@@ -39,11 +39,13 @@ import { environment } from '../environments/environment';
     RouterModule.forRoot([
       {
         path: 'simple-route',
-        component: SimpleRouteComponent
+        component: SimpleRouteComponent,
+        outlet: 'popup'
       }
     ], {enableTracing: true})
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}
