@@ -9,10 +9,13 @@
 <div>
 	<mat-list>
 		<mat-list-item *ngFor="let userr of users">
-      <a [routerLink]="userr.userid">{{userr?.userid}} </a>
-		   {{userr?.username}}, {{userr?.role.roleName}}
+      <nav>
+      <a [routerLink]="['/user',userr.userid]">{{userr?.userid}} </a>
+      </nav>
+		   , {{userr?.username}}, {{userr?.role.roleName}}
 		</mat-list-item>
   </mat-list>
+  <router-outlet></router-outlet>
 </div>
 
 <div>

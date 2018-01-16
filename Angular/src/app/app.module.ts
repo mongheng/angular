@@ -11,13 +11,16 @@ import { MatListModule, MatAutocompleteModule, MatSelectModule, MatButtonModule,
 import { HttpClientModule } from '@angular/common/http';
 import { SimpleRouteComponent } from './components/simple-route/simple-route.component';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import { ViewuserComponent } from './components/viewuser/viewuser.component';
 import { environment } from '../environments/environment';
+import { AppRoutingRoutes } from './app-routing.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
     SimpleRouteComponent,
     DatePickerComponent,
+    ViewuserComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,13 +39,18 @@ import { environment } from '../environments/environment';
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
-    RouterModule.forRoot([
+    AppRoutingRoutes,
+    /* RouterModule.forRoot([
       {
         path: 'simple-route',
         component: SimpleRouteComponent,
         outlet: 'popup'
+      },
+      {
+        path: 'user/:userid',
+        component: ViewuserComponent
       }
-    ], {enableTracing: true})
+    ], {enableTracing: true}) */
   ],
   providers: [],
   bootstrap: [AppComponent]
