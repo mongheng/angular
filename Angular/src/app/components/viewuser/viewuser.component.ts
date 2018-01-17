@@ -19,7 +19,7 @@ export class ViewuserComponent implements OnInit {
   private first: any = this.activateRoute.paramMap.
     switchMap((params: ParamMap) => {
       this.uid = params.get('userid');
-      if (this.uid == null) {
+      if (this.uid === null) {
         alert('UID:' + this.uid);
       } else {
         alert('UID:' + this.uid);
@@ -29,7 +29,8 @@ export class ViewuserComponent implements OnInit {
 
   // This is the second way how to get params id from link
   private sid: string = this.activateRoute.snapshot.paramMap.get('userid'); 
-  private second: any = this.httpservice.getTypeById<User>(this.sid).then(u => this.swuser = u);
+  private second: any = this.httpservice.getTypeById<User>(this.activateRoute.snapshot.paramMap.get('userid')).
+                          then(u => this.swuser = u);
 
   constructor(private httpservice: HttpcontrollerService, private activateRoute: ActivatedRoute, private router: Router) { }
 

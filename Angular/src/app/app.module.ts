@@ -14,6 +14,7 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
 import { ViewuserComponent } from './components/viewuser/viewuser.component';
 import { environment } from '../environments/environment';
 import { AppRoutingRoutes } from './app-routing.routing';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AppRoutingRoutes } from './app-routing.routing';
     SimpleRouteComponent,
     DatePickerComponent,
     ViewuserComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
