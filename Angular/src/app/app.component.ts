@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpservice.getTypes<User>('users').then(user => this.users = user);
-    this.httpservice.getTypeById<User>('76519be9-1975-4ac5-b1d2-1892c7d2e533').then(u => this.puser = u);
+    this.httpservice.getTypeById<User>('670c2fad-9bae-46ac-9d49-3dff500d0b08').then(u => this.puser = u);
     // this.httpservice.deleteType('6b1946ad-d115-4a2e-a607-b27dbfde09f1').then(() => null);
     this.httpservice.getTypeByIdRequestParam<User>('4489d1e1-1b51-4dbe-9c6c-d2df827080ab').then(r => this.ruser = r);
     this.httpservice.getTypes<Role>('roles').then(r => this.roles = r);
@@ -141,7 +141,7 @@ export class AppComponent implements OnInit {
   }
 
   /** AsyncPipe with promises first way
-   * 
+   *
    *  @Param: ressolve(this.puser) you can replace params by using string or any object
    */
   private getAsyncPromise() {
@@ -151,7 +151,7 @@ export class AppComponent implements OnInit {
   }
 
   /** AsyncPipe with promises second way
-   * 
+   *
    *  @Param: ressolve(this.puser) you can replace params by using string or any object
    *  and we use async key word in html template (ex: {{ any object | async }})
    */
