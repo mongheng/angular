@@ -25,7 +25,7 @@ export class ViewuserComponent implements OnInit {
         alert('UID:' + this.uid);
         return this.httpservice.getTypeById<User>(this.uid);
       }
-      }).subscribe(u => this.fwuser = u);
+    }).subscribe(u => this.fwuser = u);
 
   // This is the second way how to get params id from link
   private sid: string = this.activateRoute.snapshot.paramMap.get('userid'); 

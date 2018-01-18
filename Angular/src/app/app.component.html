@@ -17,7 +17,18 @@
   </mat-list>
   <router-outlet></router-outlet>
 </div>
-
+<div>
+  <!-- We use ngNonBindable so we can render out {{ AsyncUserFirstWay }} as is without trying to bind to to the property AsyncUserFirstWay -->
+  <h4 class="h4color">AsyncPipe with promises first way but We use ngNonBindable so we can render out {{ AsyncUserFirstWay }} as is without trying to bind to to the property AsyncUserFirstWay</h4>
+  <h4 ngNonBindable>{{AsyncUserFirstWay?.userid}}, {{AsyncUserFirstWay?.username}}, {{AsyncUserFirstWay?.role.roleName}}</h4>
+  <br/>
+  <h4 class="h4color">AsyncPipe with promises first way</h4>
+  <h4>{{AsyncUserFirstWay?.userid}}, {{AsyncUserFirstWay?.username}}, {{AsyncUserFirstWay?.role.roleName}}</h4>
+</div>
+<div>
+  <h4 class="h4color">AsyncPipe with promises second way by using async in template (html).</h4>
+  <h4>{{AsyncUserSecondWay | async | json}}</h4>
+</div>
 <div>
   <h4>Accessing @PathVariable...</h4>
 	<h4>{{puser?.userid}}, {{puser?.username}}, {{puser?.role.roleName}}</h4>

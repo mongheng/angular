@@ -5,6 +5,7 @@ import { Role } from './model/role';
 import { FormsModule } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
 import { DataSource } from '@angular/cdk/collections';
 import { FormControl } from '@angular/forms/src/model';
 import { RouterLinkActive, ActivatedRoute, Router } from '@angular/router';
@@ -27,6 +28,12 @@ export class AppComponent implements OnInit {
   currectRole: Role;
   bStatu: boolean;
 
+  // AsyncPipe with promises first way
+  AsyncUserFirstWay: User;
+
+  // AsyncPipe with promises second way by using async in template (html).
+  AsyncUserSecondWay: Promise<User>;
+
   displayedColumns = ['userid', 'username', 'password', 'telephone', 'email', 'image', 'role'];
   dataSource = new UserDataSource(this.httpservice);
 
@@ -45,6 +52,12 @@ export class AppComponent implements OnInit {
       this.updateRole = new Role;
     }
     this.bStatu = false;
+
+    // AsyncPipe with promises first way
+    this.getAsyncPromise().then(u => this.AsyncUserFirstWay = u as User);
+
+    // AsyncPipe with promises second way
+    this.AsyncUserSecondWay = this.getAsyncPromiseSecondWay();
   }
 
   public saveUser(): void {
@@ -127,8 +140,31 @@ export class AppComponent implements OnInit {
     this.bStatu = true;
   }
 
-}
+  /** AsyncPipe with promises first way
+   * 
+   *  @Param: ressolve(this.puser) you can replace params by using string or any object
+   */
+  private getAsyncPromise() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(this.puser as User), 10000);
+    });
+  }
 
+  /** AsyncPipe with promises second way
+   * 
+   *  @Param: ressolve(this.puser) you can replace params by using string or any object
+   *  and we use async key word in html template (ex: {{ any object | async }})
+   */
+  private getAsyncPromiseSecondWay() {
+    return new Promise<User>((resolve, reject) => {
+      setTimeout(() => resolve(this.puser), 10000);
+    });
+  }
+
+  private getAsyncObservable() {
+    return Observable.interval(1000);
+  }
+}
 export class UserDataSource extends DataSource<any> {
 
   constructor(private httpcontrollerService: HttpcontrollerService) {

@@ -22,7 +22,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     SimpleRouteComponent,
     DatePickerComponent,
     ViewuserComponent,
-    PageNotFoundComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +41,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
-    AppRoutingRoutes,
+    AppRoutingRoutes
     /* RouterModule.forRoot([
       {
         path: 'simple-route',
